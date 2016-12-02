@@ -88,7 +88,7 @@ public class BlockBROre extends BlockBR {
 			product = OreDictionaryHelper.getOre("ingotYellorium");
 		}
 
-		GameRegistry.addSmelting(ore, product, 0.5f);
+		//GameRegistry.addSmelting(ore, product, 0.5f);
 	}
 
 	/**

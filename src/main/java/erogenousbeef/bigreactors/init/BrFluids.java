@@ -13,6 +13,7 @@ public class BrFluids {
     public static final Fluid fluidCyanite;
     public static final Fluid fluidSteam;
     public static final Fluid fluidFuelColumn;
+    public static final Fluid fluiduFuel;
 
     public static void initialize() {
     }
@@ -45,6 +46,33 @@ public class BrFluids {
 
         FluidRegistry.addBucketForFluid(fluidYellorium = fluid);
 
+        
+        
+        // - Enriched Uranium
+        if (null == (fluid = FluidRegistry.getFluid("uraniumfuel"))) {
+
+            FluidRegistry.registerFluid(fluid = new ModFluid("uraniumfuel",
+                    BigReactors.createBlockResourceLocation("uraniumfuelStill"),
+                    BigReactors.createBlockResourceLocation("uraniumfuelFlowing")) {
+
+                @Override
+                protected void initialize() {
+
+                    this.setDensity(100);
+                    this.setGaseous(false);
+                    this.setLuminosity(20);
+                    this.setRarity(EnumRarity.UNCOMMON);
+                    this.setTemperature(295);
+                    this.setViscosity(100);
+                }
+            });
+        }
+
+        FluidRegistry.addBucketForFluid(fluiduFuel = fluid);
+
+        
+            
+        
         // - cyanite
         if (null == (fluid = FluidRegistry.getFluid("cyanite"))) {
 

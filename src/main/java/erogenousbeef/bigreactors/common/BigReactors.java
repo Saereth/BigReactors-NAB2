@@ -32,7 +32,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import java.util.Calendar;
 
 @Mod(modid = BigReactors.MODID, name = BigReactors.NAME, version = "0.0.0.0",
-		acceptedMinecraftVersions = "", dependencies = "required-after:Forge;required-after:zerocore",
+		acceptedMinecraftVersions = "", dependencies = "required-after:Forge;required-after:zerocore;required-after:IC2",
 		guiFactory = "erogenousbeef.bigreactors.client.config.ConfigFactory")
 public class BigReactors implements IModInitializationHandler {
 
@@ -50,6 +50,7 @@ public class BigReactors implements IModInitializationHandler {
 
 	public static final int defaultFluidColorFuel = 0xbcba50;
 	public static final int defaultFluidColorWaste = 0x4d92b5;
+	public static final int fluidColorUranium = 0x46c81a;
 
 	public static BigReactors getInstance() {
 		return BigReactors.s_instance;
@@ -119,11 +120,14 @@ public class BigReactors implements IModInitializationHandler {
 		// Register fluid => reactant mappings
 		Reactants.registerFluid(BrFluids.fluidYellorium, StandardReactants.yellorium);
 		Reactants.registerFluid(BrFluids.fluidCyanite, StandardReactants.cyanite);
+		Reactants.registerFluid(BrFluids.fluiduFuel, StandardReactants.uFuel);
 
+		
+		
 		// Register reactant => reactant conversions for making cyanite
 		ReactorConversions.register(StandardReactants.yellorium, StandardReactants.cyanite);
 		ReactorConversions.register(StandardReactants.blutonium, StandardReactants.cyanite);
-
+		ReactorConversions.register(StandardReactants.uFuel, StandardReactants.cyanite);
 
 		boolean enableFantasyMetals = BigReactors.CONFIG.enableMetallurgyFantasyMetalsInTurbines;
 		boolean enableComedy = BigReactors.CONFIG.enableComedy;
@@ -217,8 +221,14 @@ public class BigReactors implements IModInitializationHandler {
 		ReactorInterior.registerFluid("fluidcryotheum", 0.66f, 0.95f, 6.00f, IHeatEntity.conductivityDiamond); // Cryotheum: an amazing moderator!
 		ReactorInterior.registerFluid("fluidender", 0.90f, 0.75f, 2.00f, IHeatEntity.conductivityGold);
 		ReactorInterior.registerFluid("fluidpyrotheum", 0.66f, 0.90f, 1.00f, IHeatEntity.conductivityIron);
-		ReactorInterior.registerFluid("lifeessence", 0.70f, 0.55f, 1.75f, IHeatEntity.conductivityGold); // From Blood Magic
 
+		ReactorInterior.registerFluid("lifeessence", 0.70f, 0.55f, 1.75f, IHeatEntity.conductivityGold); // From Blood Magic
+		ReactorInterior.registerFluid("xpjuice", 0.9f, 0.99f, 2.00f, IHeatEntity.conductivityEmerald); // flashy reactivity and pretty good moderator
+		ReactorInterior.registerFluid("liquid_eessence", 0.70f, 0.55f, 1.75f, IHeatEntity.conductivityEmerald); // From Ars Magica 2
+		ReactorInterior.registerFluid("ic2coolant", 0.66f, 0.95f, 6.00f, IHeatEntity.conductivityDiamond); // IC2 Liquid coolant: an amazing moderator!
+		ReactorInterior.registerFluid("ic2uu_matter", 0.9f, 0.99f, 18.00f, IHeatEntity.conductivityDiamond); // Seriously!?
+		
+		
 		if (enableComedy) {
 			ReactorInterior.registerBlock("blockMeat", 0.50f, 0.33f, 1.33f, IHeatEntity.conductivityStone);
 			ReactorInterior.registerBlock("blockMeatRaw", 0.40f, 0.50f, 1.50f, IHeatEntity.conductivityStone);
